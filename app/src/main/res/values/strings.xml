@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">Coursework</string>
 
-    <string name="item_products">Products</string>
-    <string name="item_cart">Cart</string>
-    <string name="item_profile">Profile</string>
+    <string name="products">Products</string>
+    <string name="cart">Cart</string>
+    <string name="profile">Profile</string>
+    <string name="productsCount">Products (%d)</string>
+    <string name="discount">Discount</string>
+    <string name="total_amount">Total amount</string>
+    <string name="checkout">Checkout</string>
+    <string name="price">%d $</string>
+    <string name="discountNum">- %d $</string>
 
 </resources>

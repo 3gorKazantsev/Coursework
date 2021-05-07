@@ -5,16 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.kazantsev.coursework.R
 import org.kazantsev.coursework.adapters.ProductAdapter
 import org.kazantsev.coursework.data.Product
+import org.kazantsev.coursework.viewmodels.ProductViewModel
 
 class ProductListFragment : Fragment() {
 
-    // widgets
+    // RecyclerView
     private lateinit var recyclerView: RecyclerView
+    private var adapter = ProductAdapter(emptyList())
+
+    // ViewModel
+    private val viewModel: ProductViewModel by lazy {
+        ViewModelProvider(this).get(ProductViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,8 +36,24 @@ class ProductListFragment : Fragment() {
 
         // setting the recycler view
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = ProductAdapter(Product.getProductList())
+        recyclerView.adapter = adapter
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.productListLiveData
+            .observe(viewLifecycleOwner) { products ->
+                products?.let {
+                    updateUI(products)
+                }
+            }
+    }
+
+    private fun updateUI(products: List<Product>) {
+        adapter = ProductAdapter(products)
+        recyclerView.adapter = adapter
     }
 }

@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import org.kazantsev.coursework.R
 import org.kazantsev.coursework.data.Product
 
-class ProductAdapter(
+class CartListAdapter(
     private val productList: List<Product>
-) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+) : RecyclerView.Adapter<CartListAdapter.CartViewHolder>() {
 
-    inner class ProductViewHolder(item: View) : RecyclerView.ViewHolder(item) {
+    inner class CartViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         // widgets
         private val nameTextView = item.findViewById<TextView>(R.id.itemName)
         private val idTextView = item.findViewById<TextView>(R.id.itemId)
@@ -24,15 +24,15 @@ class ProductAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         // inflating the item view
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_product, parent, false)
+            .inflate(R.layout.item_cart, parent, false)
 
-        return ProductViewHolder(itemView)
+        return CartViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         // binding item's widgets and instance's properties
         val product = productList[position]
         holder.bind(product)
